@@ -57,6 +57,11 @@ class Application
           <p>If you don't know what is this password, please contact the system administrator.</p>
         EOHTML
     else
+      puts 'looping'
+      values = Table.all.values
+      values.each do |row|
+        puts row.inspect
+      end
       html = <<-EOHTML
           <h1>Master password</h1>
           <p>#{$master_password}</p>
@@ -84,5 +89,12 @@ class Logout
   def call(env)
     $master_password = nil
     [ 302, { 'Location' => '/' }, '']
+  end
+end
+
+class DevNull
+  def call(env)
+    puts "Don't answer to that"
+    [ 404, { "Content-Type" => "text/plain" }, [ "Not found." ]]
   end
 end

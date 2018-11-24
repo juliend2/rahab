@@ -9,4 +9,5 @@ run Rack::URLMap.new({
   "/" => Application.new,
   "/password" => Password.new,
   "/logout" => Logout.new,
+  "/favicon.ico" => DevNull.new,
 })
